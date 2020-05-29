@@ -22,6 +22,8 @@ manifest:
     # NCS repositories are hosted here.
     - name: ncs
       url-base: https://github.com/nrfconnect
+    - name: MarekPorwisz
+      url-base: https://github.com/MarekPorwisz
     # Third-party repository sources:
     - name: zephyrproject
       url-base: https://github.com/zephyrproject-rtos
@@ -47,6 +49,8 @@ manifest:
     - name: zephyr
       repo-path: sdk-zephyr
       revision: v2.3.0-rc1-ncs1-rc1
+      # revision: c9fbb0284fe2af386d0eda7a6f4213b24c0c335e
+      # remote: MarekPorwisz
       import:
         # In addition to the zephyr repository itself, NCS also
         # imports the contents of zephyr/west.yml at the above

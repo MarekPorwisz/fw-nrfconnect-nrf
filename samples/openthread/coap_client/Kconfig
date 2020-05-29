@@ -8,6 +8,19 @@ menu "Zephyr Kernel"
 source "Kconfig.zephyr"
 endmenu
 
+config MULTIPROTOCOL_SUPPORT
+	bool "Enable multiprotocol in the sample"
+	default n
+	select BT_LL_NRFXLIB_DEFAULT
+	select BT
+	select BT_SMP
+	select BT_PERIPHERAL
+	select BT_GATT_NUS
+	select BT_SETTINGS
+	help
+	  Enables multiprotocol related code parts of the CoAP Client sample.
+
+
 module = COAP_CLIENT
 module-str = CoAP client
 source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"

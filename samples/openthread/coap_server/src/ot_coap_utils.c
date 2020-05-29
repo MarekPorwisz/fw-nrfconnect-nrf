@@ -84,6 +84,7 @@ static otError provisioning_response_send(otMessage *request_message,
 end:
 	if (error != OT_ERROR_NONE && response != NULL) {
 		otMessageFree(response);
+		LOG_ERR("Failed to send resp.");
 	}
 
 	return error;
