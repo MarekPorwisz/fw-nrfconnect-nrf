@@ -11,7 +11,8 @@ The 'openthread/cli' sample is used as a base, modifiying it with an overlay fil
 
 ::
 
- west build -b nrf52840dk_nrf52840 nrf/samples/openthread/cli/ -- -DCONF_FILE="prj.conf thread_cert/overlay.cert_mi.conf"
+ cd nrf/samples/openthread/cli/
+ west build -b nrf52840dk_nrf52840 -- -DCONF_FILE="prj.conf overlay-cert_mi.conf"
 
 Prepare Thread Harness
 **********************
