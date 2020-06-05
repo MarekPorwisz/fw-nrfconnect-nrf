@@ -60,7 +60,7 @@ LINESEPX = re.compile(r'\r|\n')
 """regex: used to split lines"""
 
 
-class nRF528xx(IThci):
+class nRF52840(IThci):
     LOWEST_POSSIBLE_PARTATION_ID = 0x1
     LINK_QUALITY_CHANGE_TIME = 100
 
@@ -188,8 +188,8 @@ class nRF528xx(IThci):
         except socket.error:
             logging.debug('%s: Nothing cleared', self.port)
 
-        # NCS adaptation
-        line = 'ot %s' % line
+        if not line.startswith('ot '):
+            line = 'ot %s' % line
 
         print('sending [%s]' % line)
         self._write(line + '\r')
@@ -208,6 +208,9 @@ class nRF528xx(IThci):
             Value: successfully retrieve the desired value from reference unit
             Error: some errors occur, indicates by the followed specific error number
         """
+        # NCS adaptation
+        cmd = 'ot %s' % cmd
+
         logging.info('%s: sendCommand[%s]', self.port, cmd)
         if self.logThreadStatus == self.logStatus['running']:
             self.logThreadStatus = self.logStatus['pauseReq']
@@ -1155,6 +1158,8 @@ class nRF528xx(IThci):
         print('%s call powerDown' % self.port)
         self._sendline('reset')
         time.sleep(0.5)
+        # To be removed:
+        #self._sendline('ifconfig down')
         self.isPowerDown = True
 
     def powerUp(self):
@@ -1178,6 +1183,9 @@ class nRF528xx(IThci):
         print('%s call reboot' % self.port)
         try:
             self._sendline('reset')
+            # To be removed:
+            #time.sleep(0.5)
+            #self._sendline('ifconfig down')
             self.isPowerDown = True
             time.sleep(3)
 
@@ -1274,6 +1282,8 @@ class nRF528xx(IThci):
             self._sendline('factoryreset')
             self._read()
             time.sleep(0.5)
+            # To be removed:
+            #self._sendline('ifconfig down')
 
         except Exception as e:
             ModuleHelper.WriteIntoDebugLogger('reset() Error: ' + str(e))
@@ -1517,6 +1527,9 @@ class nRF528xx(IThci):
         print(timeout)
         try:
             self._sendline('reset')
+            # To be removed:
+            #time.sleep(0.5)
+            #self._sendline('ifconfig down')
             self.isPowerDown = True
             time.sleep(timeout)
 

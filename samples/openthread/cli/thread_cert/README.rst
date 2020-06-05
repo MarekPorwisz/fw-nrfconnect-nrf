@@ -17,15 +17,15 @@ The 'openthread/cli' sample is used as a base, modifiying it with an overlay fil
 Prepare Thread Harness
 **********************
 
-Copy the provided ``nrf528xx-ncs.py`` file into ``C:\GRL\Thread1.1\Thread_Harness\THCI``.
+Copy the provided ``nrf52840-ncs.py`` file into ``C:\GRL\Thread1.1\Thread_Harness\THCI``.
 
-Copy the provided ``nrf528xx.jpg into`` ``C:\GRL\Thread1.1\Web\images``.
+Copy the provided ``nrf52840.jpg into`` ``C:\GRL\Thread1.1\Web\images``.
 
 Edit ``C:\GRL\Thread1.1\Web\data\deviceInputFields.xml`` and prepend this:
 
 ::
 
-    <DEVICE name="nRF528xx-NCS" thumbnail="nRF528xx.jpg" description = "Nordic Semiconductor: nRF528xx (NCS) Baudrate:115200" THCI="nRF528xx-ncs">
+    <DEVICE name="nRF52840-ncs" thumbnail="nRF52840.jpg" description = "Nordic Semiconductor: nRF52840 (NCS) Baudrate:115200" THCI="nRF52840-ncs">
         <ITEM label="Serial Line"
               type="text"
               forParam="SerialPort"
