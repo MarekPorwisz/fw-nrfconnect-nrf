@@ -11,3 +11,18 @@ endmenu
 module = OT_COMMAND_LINE_INTERFACE
 module-str = ot_cli
 source "${ZEPHYR_BASE}/subsys/logging/Kconfig.template.log_config"
+
+	config MBEDTLS_PK_C
+	bool
+	prompt "Enable the generic public (asymetric) key layer"
+	default y
+	help
+	  Enable generic public key wrappers.
+
+config MBEDTLS_PK_WRITE_C
+	bool
+	prompt "Enable the generic public (asymetric) key writer"
+	depends on (MBEDTLS_PK_C)
+	default n
+	help
+	  Enable generic public key write functions.
