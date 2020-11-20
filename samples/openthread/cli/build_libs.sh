@@ -42,6 +42,9 @@ copy_libs()
   cp -v $nrf_security_build_dir/src/mbedtls/cc310/libmbedcrypto_cc3xx.a $lib_dir/libmbedcrypto_cc3xx$name_sufix.a
   cp -v $nrfxlib_dir/crypto/nrf_cc310_platform/lib/cortex-m4/hard-float$platform_lib_path/no-interrupts/libnrf_cc310_platform_$lib_version.a $lib_dir/libnrf_cc310_platform_$lib_version$name_sufix.a
 
+  # oberon
+  cp -v $nrf_security_build_dir/src/mbedtls/oberon/libmbedcrypto_oberon.a $lib_dir/libmbedcrypto_oberon$name_sufix.a
+
   # common/glue
   cp -v $nrf_security_build_dir/src/mbedtls/shared/libmbedcrypto_shared.a $lib_dir/libmbedcrypto_shared$name_sufix.a
   cp -v $nrf_security_build_dir/src/mbedcrypto_glue/libmbedcrypto_glue.a $lib_dir/libmbedcrypto_glue$name_sufix.a
