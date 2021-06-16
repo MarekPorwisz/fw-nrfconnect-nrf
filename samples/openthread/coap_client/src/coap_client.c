@@ -111,11 +111,11 @@ static void on_button_changed(uint32_t button_state, uint32_t has_changed)
 	uint32_t buttons = button_state & has_changed;
 
 	if (buttons & DK_BTN1_MSK) {
-		coap_client_toggle_one_light();
+		//coap_client_toggle_one_light();
 	}
 
 	if (buttons & DK_BTN2_MSK) {
-		coap_client_toggle_mesh_lights();
+		//coap_client_toggle_mesh_lights();
 	}
 
 	if (buttons & DK_BTN3_MSK) {
@@ -123,7 +123,7 @@ static void on_button_changed(uint32_t button_state, uint32_t has_changed)
 	}
 
 	if (buttons & DK_BTN4_MSK) {
-		coap_client_send_provisioning_request();
+		//coap_client_send_provisioning_request();
 	}
 }
 
@@ -179,4 +179,5 @@ void main(void)
 
 	coap_client_utils_init(on_ot_connect, on_ot_disconnect,
 			       on_mtd_mode_toggle);
+
 }
