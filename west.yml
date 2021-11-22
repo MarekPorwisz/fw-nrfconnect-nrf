@@ -35,6 +35,8 @@ manifest:
       url-base: https://github.com/PelionIoT
     - name: memfault
       url-base: https://github.com/memfault
+    - name: MarekPorwisz
+      url-base: https://github.com/MarekPorwisz
 
   # If not otherwise specified, the projects below should be obtained
   # from the ncs remote.
@@ -88,7 +90,6 @@ manifest:
           - net-tools
           - nrf_hw_models
           - open-amp
-          - openthread
           - segger
           - tinycbor
           - tinycrypt
@@ -165,6 +166,10 @@ manifest:
       revision: 5d36cf6696e9d8c5f589934a8a6e7964b58c0d84
       groups:
       - homekit
+    - name: sdk-openthread
+      path: modules/lib/openthread
+      revision: df39f44df27869b494510a7a33a7ab7894ab044f
+      remote: MarekPorwisz
     - name: find-my
       repo-path: sdk-find-my
       revision: 7d5abb066c35c01a65ee6c0c5525ff13caec939c
