@@ -38,6 +38,7 @@ struct nrf_rpc_os_msg {
 	struct k_condvar event;
 	const uint8_t *data;
 	size_t len;
+	uint8_t waiting;
 };
 
 typedef void (*nrf_rpc_os_work_t)(const uint8_t *data, size_t len);

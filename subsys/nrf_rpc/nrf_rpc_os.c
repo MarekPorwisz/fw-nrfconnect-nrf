@@ -103,12 +103,16 @@ void nrf_rpc_os_msg_set(struct nrf_rpc_os_msg *msg, const uint8_t *data,
 {
 	msg->data = data;
 	msg->len = len;
+	msg->waiting = 0;
 	(void)k_condvar_signal(&msg->event);
+
 }
 
 void nrf_rpc_os_msg_get(struct nrf_rpc_os_msg *msg, struct nrf_rpc_os_mutex *mutex,
 			const uint8_t **data, size_t *len)
 {
+	msg->waiting = 1;
+
 	int rc = k_condvar_wait(&msg->event, &mutex->mutex,
 				CONFIG_NRF_RPC_RESPONSE_TIMEOUT == -1
 					? K_FOREVER

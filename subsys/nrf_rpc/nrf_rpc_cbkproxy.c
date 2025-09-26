@@ -8,7 +8,7 @@
 #include <stdint.h>
 
 #include <zephyr/kernel.h>
-
+#include <nrf_rpc.h>
 #include <nrf_rpc/nrf_rpc_cbkproxy.h>
 
 static K_MUTEX_DEFINE(mutex);
@@ -141,16 +141,26 @@ static struct
 
 static uint32_t next_free_in_slot;
 
+void ot_rpc_cbproxy_clear(void *context)
+{
+	k_mutex_lock(&mutex, K_FOREVER);
+	memset(in_slots, 0, sizeof(in_slots));
+	k_mutex_unlock(&mutex);
+}
+
 int nrf_rpc_cbkproxy_in_set(void *callback)
 {
 	int index = 0;
 	uint16_t *attach_to = NULL;
 	uintptr_t callback_int = (uintptr_t)callback;
+	static struct callback_cleanup_handler cleanup_handler;
 
 	k_mutex_lock(&mutex, K_FOREVER);
 
 	if (next_free_in_slot == 0) {
 		attach_to = &in_slots[0].lt;
+		cleanup_handler.clear_all_callbacks = ot_rpc_cbproxy_clear;
+		nrf_rpc_register_callback_cleanup(&cleanup_handler);
 	} else {
 		do {
 			if (callback_int == in_slots[index].callback) {
