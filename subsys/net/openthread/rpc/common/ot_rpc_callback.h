@@ -69,7 +69,7 @@ void ot_rpc_callback_clear(struct ot_rpc_callback *table, size_t table_size);
  */
 #define OT_RPC_CALLBACK_TABLE_DEFINE(name, type, size)                                             \
 	static struct ot_rpc_callback name[size];                                                  \
-	static struct callback_cleanup_handler name##_cleanup_handler;                             \
+	static struct nrf_rpc_cleanup_handler name##_cleanup_handler;                             \
                                                                                                    \
 	static inline void ot_rpc_##name##_clear(void *context)                                    \
 	{                                                                                          \
@@ -77,9 +77,9 @@ void ot_rpc_callback_clear(struct ot_rpc_callback *table, size_t table_size);
 	}                                                                                          \
 	static inline ot_rpc_callback_id ot_rpc_##name##_alloc(type func, void *context)           \
 	{                                                                                          \
-		if (name##_cleanup_handler.clear_all_callbacks == NULL) {                          \
-			name##_cleanup_handler.clear_all_callbacks = ot_rpc_##name##_clear;        \
-			nrf_rpc_register_callback_cleanup(&name##_cleanup_handler);          \
+		if (name##_cleanup_handler.handler == NULL) {                          \
+			name##_cleanup_handler.handler = ot_rpc_##name##_clear;        \
+			nrf_rpc_register_cleanup_handler(&name##_cleanup_handler);          \
 		}                                                                                  \
 		return ot_rpc_callback_alloc(name, ARRAY_SIZE(name), (ot_rpc_callback_func)func,   \
 					     context);                                             \
